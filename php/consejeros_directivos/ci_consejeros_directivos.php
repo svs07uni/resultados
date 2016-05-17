@@ -1,7 +1,6 @@
 <?php
 class ci_consejeros_directivos extends ci_principal
 {
-    
     //-----------------------------------------------------------------------------------
 	//---- Configuraciones --------------------------------------------------------------
 	//-----------------------------------------------------------------------------------
@@ -11,8 +10,8 @@ class ci_consejeros_directivos extends ci_principal
             $this->pantalla()->tab("pant_docente")->ocultar();
             
             $this->controlador()->dep('form_unidad')->ef('id_nro_ue')->set_estado($this->controlador->s__unidad);
-                        
-	}
+             
+        }
         
 	//-----------------------------------------------------------------------------------
 	//---- cuadro_directivo_e -----------------------------------------------------------
@@ -308,7 +307,7 @@ class ci_consejeros_directivos extends ci_principal
 	//-----------------------------------------------------------------------------------
         function vista_excel(toba_vista_excel $salida){
             $unidad = $this->controlador()->dep('datos')->tabla('unidad_electoral')->get_descripciones($this->controlador->s__unidad);
-            $salida->set_nombre_archivo($unidad[0]['sigla']." - Escrutinio Directivo.xls");
+            $salida->set_nombre_archivo($unidad[0]['sigla']."-EscrutinioDirectivo.xls");
             $excel = $salida->get_excel();
             
             //Estilo de la celda que hara de separacion entre claustros
