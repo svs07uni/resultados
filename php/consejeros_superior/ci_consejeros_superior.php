@@ -14,7 +14,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             $this->dep('cuadro_superior_e')->colapsar();//No se muestra el cuadro en un principio
             
-            $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones();
+            $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
             
             //Cargar la cantidad de empadronados para el claustro estudiantes=3
             // en cada unidad
@@ -230,7 +230,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             $this->dep('cuadro_superior_g')->colapsar();//No se muestra el cuadro en un principio
             
-            $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones();
+            $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
             
             //Cargar la cantidad de empadronados para el claustro graduados=4
             // en cada unidad
@@ -382,7 +382,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             $this->dep('cuadro_superior_nd')->colapsar();//No se muestra el cuadro en un principio
             
-            $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones();
+            $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
             
             //Cargar la cantidad de empadronados para el claustro no docente = 1
             // en cada unidad
