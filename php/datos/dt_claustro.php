@@ -3,7 +3,7 @@ class dt_claustro extends resultados_datos_tabla
 {
 	function get_descripciones()
 	{
-		$sql = "SELECT id, descripcion FROM claustro ORDER BY descripcion";
+		$sql = "SELECT id, descripcion FROM claustro where id<>2 ORDER BY descripcion";
 		return toba::db('resultados')->consultar($sql);
 	}
 
