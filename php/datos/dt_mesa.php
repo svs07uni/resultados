@@ -40,11 +40,11 @@ class dt_mesa extends resultados_datos_tabla {
             if ($fila['unidad'] != $unidad || $fila['sede'] != $sede || $fila['nro_mesa'] != $nro_mesa) {
                
                 if (!is_null($filanueva)) {
-                    $filanueva['total'] = $total+$filanueva['total_votos_blancos']+$filanueva['total_votos_nulos']+$filanueva['total_votos_recurridos'];
+                    $filanueva['total'] = $total;
                     
                     $resumen[] = $filanueva;
                 }
-                $total = 0;
+                $total = $filanueva['total_votos_blancos']+$filanueva['total_votos_nulos']+$filanueva['total_votos_recurridos'];
                 $unidad = $fila['unidad'];
                 $sede = $fila['sede'];
                 $nro_mesa = $fila['nro_mesa'];
