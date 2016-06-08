@@ -44,7 +44,7 @@ class dt_mesa extends resultados_datos_tabla {
                     
                     $resumen[] = $filanueva;
                 }
-                $total = $filanueva['total_votos_blancos']+$filanueva['total_votos_nulos']+$filanueva['total_votos_recurridos'];
+                $total = $fila['total_votos_blancos']+$fila['total_votos_nulos']+$fila['total_votos_recurridos'];
                 $unidad = $fila['unidad'];
                 $sede = $fila['sede'];
                 $nro_mesa = $fila['nro_mesa'];
