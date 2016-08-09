@@ -11,13 +11,14 @@ class ci_mesas_superior extends toba_ci {
     protected $nombre_tabla = 'mesa';
     protected $s__id_claustro;
     protected $s__datos_filtro;
-
+    
     //---- Cuadro -----------------------------------------------------------------------
 
     function conf__filtro(toba_ei_formulario $filtro) {
         if (isset($this->s__datos_filtro))
             $filtro->set_datos($this->s__datos_filtro);
     }
+    
     function evt__filtro__filtrar($datos) {
         //ei_arbol($datos);
         $this->s__id_claustro = $datos['id_claustro'];

@@ -35,7 +35,7 @@ class ci_consejeros_directivos extends ci_principal
                 $this->dep('cuadro_dhondt_e')->agregar_columnas($c);
             }
             
-            $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(3,$this->controlador->s__unidad);
+            $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(3,$this->controlador->s__unidad,  $this->controlador->s__fecha);
             
             $ar = array();
             foreach($listas as $pos=>$lista){
@@ -87,7 +87,7 @@ class ci_consejeros_directivos extends ci_principal
 
 	function conf__cuadro_dhondt_g(resultados_ei_cuadro $cuadro)
 	{
-            $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(4,$this->controlador->s__unidad);
+            $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(4,$this->controlador->s__unidad, $this->controlador->s__fecha);
             
             $ar = array();
             foreach($listas as $pos=>$lista){
@@ -155,7 +155,7 @@ class ci_consejeros_directivos extends ci_principal
                 $this->dep('cuadro_dhondt_nd')->agregar_columnas($c);
             }
              
-            $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(1,$this->controlador->s__unidad);
+            $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(1,$this->controlador->s__unidad, $this->controlador->s__fecha);
             
             $ar = array();
             foreach($listas as $pos=>$lista){
@@ -207,7 +207,7 @@ class ci_consejeros_directivos extends ci_principal
 
 	function conf__cuadro_dhondt_d(resultados_ei_cuadro $cuadro)
 	{
-            if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
+           /* if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 3 puestos
                 $cargos = 6;                
             }
@@ -272,6 +272,7 @@ class ci_consejeros_directivos extends ci_principal
                 
             
             return $listas;
+            */
 	}
 
 	function evt__cuadro_dhondt_d__seleccion($seleccion)

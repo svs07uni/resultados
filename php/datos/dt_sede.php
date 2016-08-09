@@ -1,15 +1,13 @@
 <?php
 class dt_sede extends resultados_datos_tabla
 {
-	function get_descripciones($id_nro_ue = null)
+	function get_descripciones()
 	{
-            if(isset($id_nro_ue))
-                $where = " WHERE id_ue = $id_nro_ue";
-            else
-                $where = "";
-		$sql = "SELECT id_sede, nombre FROM sede $where ORDER BY nombre";
+		$sql = "SELECT id_sede, nombre FROM sede ORDER BY nombre";
 		return toba::db('resultados')->consultar($sql);
 	}
+
+
 
         
         function get_descripcion($id_sede){

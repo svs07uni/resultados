@@ -2,7 +2,8 @@
 class ci_principal extends resultados_ci
 {
     protected $s__unidad;
-	//-----------------------------------------------------------------------------------
+    protected $s__fecha;
+    //-----------------------------------------------------------------------------------
 	//---- form_unidad -----------------------------------------------------------
 	//-----------------------------------------------------------------------------------
 
@@ -10,8 +11,8 @@ class ci_principal extends resultados_ci
 	{
             if(!isset($this->s__unidad))
                 $this->s__unidad = 1;
-            
-                        
+            $this->s__fecha = toba::memoria() -> get_parametro('param');
+                           
 	}
     
 	function evt__form_unidad__modificacion($datos)

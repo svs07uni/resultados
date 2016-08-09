@@ -27,7 +27,13 @@ class dt_voto_lista_cdirectivo extends resultados_datos_tabla
 	}
 
         //usado por ci_consejeros_directivos
-        function get_listas_con_total_votos($id_claustro, $id_nro_ue){
+        function get_listas_con_total_votos($id_claustro, $id_nro_ue, $fecha){
+            if($fecha==NULL){
+                $fecha = "(SELECT max(fecha) FROM lista_cdirectivo)";
+            }
+            else{
+                $fecha = "'$fecha'";
+            }
             $sql = "SELECT
                         t_l.id_nro_lista,
                         t_l.nombre,
@@ -40,7 +46,7 @@ class dt_voto_lista_cdirectivo extends resultados_datos_tabla
                         INNER JOIN mesa t_m ON (t_m.id_mesa = t_a.de)
                 WHERE t_l.id_claustro = $id_claustro "
                     . "AND t_l.id_ue = $id_nro_ue "
-                    . "AND t_l.fecha = (SELECT max(fecha) FROM lista_cdirectivo)"
+                    . "AND t_l.fecha = $fecha"
                     . " AND t_m.estado > 1 "
                     . "GROUP BY t_l.id_nro_lista "
                     . "ORDER BY votos DESC";

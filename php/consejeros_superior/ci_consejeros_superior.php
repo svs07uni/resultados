@@ -7,11 +7,15 @@ class ci_consejeros_superior extends toba_ci
     protected $s__votos_d;
     
     protected $s__total_emp;
-    
+    protected $s__fecha;
+
+
     //---- Cuadro -----------------------------------------------------------------------
 
 	function conf__cuadro_superior_e(resultados_ei_cuadro $cuadro)
 	{
+            $f= date_create($this->s__fecha);
+            print_r(date_format($f, 'd-m-Y'));
             $this->dep('cuadro_superior_e')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -30,7 +34,7 @@ class ci_consejeros_superior extends toba_ci
             $ar[$pos]['sigla'] = "<span style='color:red'>PONDERADOS</span>";
                         
             //Obtener las listas del claustro estudiantes=3
-            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(3); 
+            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(3, $this->s__fecha); 
             
             //Agregar las etiquetas de todas las listas
             $i = 1;
@@ -95,7 +99,7 @@ class ci_consejeros_superior extends toba_ci
             $unidades[$p]['total_votos_recurridos'] = 0;
             for($i=0; $i<$p; $i++){//Recorro las unidades
                 //Agrega la cantidad de votos blancos,nulos y recurridos calculado en acta para cada unidad con claustro y tipo superior=1
-                $ar = $this->dep('datos')->tabla('acta')->cant_b_n_r($unidades[$i]['id_nro_ue'], $id_claustro, 1);
+                $ar = $this->dep('datos')->tabla('acta')->cant_b_n_r($unidades[$i]['id_nro_ue'], $id_claustro, 1, $this->s__fecha);
                 if(sizeof($ar)>0){
                     $unidades[$i]['total_votos_blancos'] = $ar[0]['blancos'];
                     $unidades[$i]['total_votos_nulos'] = $ar[0]['nulos'];
@@ -118,7 +122,7 @@ class ci_consejeros_superior extends toba_ci
             $this->s__total_emp = 0;
             for($i=0; $i<sizeof($unidades); $i++){//Recorro las unidades
                 //Agrega la cantidad de empadronados calculado en acta para cada unidad con claustro 
-                $unidades[$i]['cant_empadronados'] = $this->dep('datos')->tabla('mesa')->cant_empadronados($unidades[$i]['id_nro_ue'], $id_claustro);
+                $unidades[$i]['cant_empadronados'] = $this->dep('datos')->tabla('mesa')->cant_empadronados($unidades[$i]['id_nro_ue'], $id_claustro, $this->s__fecha);
                 $this->s__total_emp += $unidades[$i]['cant_empadronados'];
             }
             return $unidades;
@@ -169,7 +173,7 @@ class ci_consejeros_superior extends toba_ci
             //En $s__votos_e tengo todos los datos de los votos ponderados
             
             //Obtener las listas del claustro estudiantes=3
-            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(3); 
+            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(3, $this->s__fecha); 
             
             $ar = array();
             foreach($listas as $pos=>$lista){
@@ -228,6 +232,9 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_g(resultados_ei_cuadro $cuadro)
 	{
+            $f= date_create($this->s__fecha);
+            print_r(date_format($f, 'd-m-Y'));
+            
             $this->dep('cuadro_superior_g')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -246,7 +253,7 @@ class ci_consejeros_superior extends toba_ci
             $ar[$pos]['sigla'] = "<span style='color:red'>PONDERADOS</span>";
                           
             //Obtener las listas del claustro graduados=4
-            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(4); 
+            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(4, $this->s__fecha); 
             
             //Agregar las etiquetas de todas las listas
             $i = 1;
@@ -322,7 +329,7 @@ class ci_consejeros_superior extends toba_ci
             //En $s__votos_e tengo todos los datos de los votos ponderados
             
             //Obtener las listas del claustro estudiantes=3
-            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(4); 
+            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(4, $this->s__fecha); 
             
             $ar = array();
             foreach($listas as $pos=>$lista){
@@ -380,6 +387,9 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_nd(resultados_ei_cuadro $cuadro)
 	{
+            $f= date_create($this->s__fecha);
+            print_r(date_format($f, 'd-m-Y'));
+            
             $this->dep('cuadro_superior_nd')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -398,7 +408,7 @@ class ci_consejeros_superior extends toba_ci
             $ar[$pos]['sigla'] = "<span style='color:red'>PONDERADOS</span>";
                        
             //Obtener las listas del claustro no docente = 1
-            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(1); 
+            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(1, $this->s__fecha); 
             
             //Agregar las etiquetas de todas las listas
             $i = 1;
@@ -473,7 +483,7 @@ class ci_consejeros_superior extends toba_ci
             //En $s__votos_e tengo todos los datos de los votos ponderados
             
             //Obtener las listas del claustro no docente = 1
-            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(1); 
+            $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales(1, $this->s__fecha); 
             
             $ar = array();
             foreach($listas as $pos=>$lista){
@@ -531,6 +541,9 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_d(resultados_ei_cuadro $cuadro)
 	{
+            $f= date_create($this->s__fecha);
+            print_r(date_format($f, 'd-m-Y'));
+            
             $cuadro->set_datos($this->dep('datos')->tabla('unidad_electoral')->get_descripciones());
 	}
 
@@ -553,6 +566,7 @@ class ci_consejeros_superior extends toba_ci
 	function conf()
 	{
             $this->pantalla()->tab('pant_docente')->ocultar();
+            $this->s__fecha = toba::memoria() -> get_parametro('param');
 	}
 
         //-----------------------------------------------------------------------------------
@@ -563,11 +577,11 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__form_mesas_e(resultados_ei_formulario $form)
 	{
-            $cargadas = $this->dep('datos')->tabla('mesa')->get_cant_cargadas(3);
-            $confirmadas = $this->dep('datos')->tabla('mesa')->get_cant_confirmadas(3);
-            $definitivas = $this->dep('datos')->tabla('mesa')->get_cant_definitivas(3);
+            $cargadas = $this->dep('datos')->tabla('mesa')->get_cant_cargadas(3, $this->s__fecha);
+            $confirmadas = $this->dep('datos')->tabla('mesa')->get_cant_confirmadas(3, $this->s__fecha);
+            $definitivas = $this->dep('datos')->tabla('mesa')->get_cant_definitivas(3, $this->s__fecha);
             
-            $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(3);
+            $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(3, $this->s__fecha);
             
             $datos['cargadas'] = ($cargadas * 100 / $total);
             $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
@@ -585,11 +599,11 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__form_mesas_g(resultados_ei_formulario $form)
 	{
-            $cargadas = $this->dep('datos')->tabla('mesa')->get_cant_cargadas(4);
-            $confirmadas = $this->dep('datos')->tabla('mesa')->get_cant_confirmadas(4);
-            $definitivas = $this->dep('datos')->tabla('mesa')->get_cant_definitivas(4);
+            $cargadas = $this->dep('datos')->tabla('mesa')->get_cant_cargadas(4, $this->s__fecha);
+            $confirmadas = $this->dep('datos')->tabla('mesa')->get_cant_confirmadas(4, $this->s__fecha);
+            $definitivas = $this->dep('datos')->tabla('mesa')->get_cant_definitivas(4, $this->s__fecha);
             
-            $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(4);
+            $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(4, $this->s__fecha);
             
             $datos['cargadas'] = ($cargadas * 100 / $total);
             $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
@@ -607,11 +621,11 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__form_mesas_nd(resultados_ei_formulario $form)
 	{
-            $cargadas = $this->dep('datos')->tabla('mesa')->get_cant_cargadas(1);
-            $confirmadas = $this->dep('datos')->tabla('mesa')->get_cant_confirmadas(1);
-            $definitivas = $this->dep('datos')->tabla('mesa')->get_cant_definitivas(1);
+            $cargadas = $this->dep('datos')->tabla('mesa')->get_cant_cargadas(1, $this->s__fecha);
+            $confirmadas = $this->dep('datos')->tabla('mesa')->get_cant_confirmadas(1, $this->s__fecha);
+            $definitivas = $this->dep('datos')->tabla('mesa')->get_cant_definitivas(1, $this->s__fecha);
             
-            $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(1);
+            $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(1, $this->s__fecha);
             
             $datos['cargadas'] = ($cargadas * 100 / $total);
             $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";

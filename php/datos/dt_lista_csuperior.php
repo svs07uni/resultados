@@ -8,14 +8,19 @@ class dt_lista_csuperior extends resultados_datos_tabla
 	}
 
 
-        function get_listas_actuales($id_claustro = null){
+        function get_listas_actuales($id_claustro = null, $fecha){
             $where = "";
             if(isset($id_claustro)){//Se pide de un claustro en especifico
                 $where = "AND id_claustro = $id_claustro ";
             }
-            
+            if($fecha==NULL){
+                $fecha = "(SELECT max(fecha) FROM lista_csuperior)";
+            }
+            else{
+                $fecha = "'$fecha'";
+            }
             $sql = "SELECT id_nro_lista, nombre FROM lista_csuperior "
-                    . "WHERE fecha = (SELECT max(fecha) FROM lista_csuperior ) $where "
+                    . "WHERE fecha = $fecha $where "
                     . "ORDER BY id_nro_lista";
             return toba::db('resultados')->consultar($sql);
         }

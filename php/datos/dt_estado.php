@@ -7,5 +7,7 @@ class dt_estado extends resultados_datos_tabla
 		return toba::db('resultados')->consultar($sql);
 	}
 
+
+
 }
 ?>
