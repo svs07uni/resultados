@@ -11,7 +11,10 @@ class ci_principal extends resultados_ci
 	{
             if(!isset($this->s__unidad))
                 $this->s__unidad = 1;
-            $this->s__fecha = toba::memoria() -> get_parametro('param');
+            if($this->s__fecha==NULL){
+                $this->s__fecha = toba::memoria()->get_parametro('param');
+            }
+            
                            
 	}
     

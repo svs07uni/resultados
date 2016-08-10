@@ -19,6 +19,10 @@ class ci_consejeros_directivos extends ci_principal
 
 	function conf__cuadro_dhondt_e(resultados_ei_cuadro $cuadro)
 	{
+            if ($this->controlador->s__fecha != NULL){
+                $f= date_create($this->controlador->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 3 puestos
                 $cargos = 3;                
@@ -87,6 +91,10 @@ class ci_consejeros_directivos extends ci_principal
 
 	function conf__cuadro_dhondt_g(resultados_ei_cuadro $cuadro)
 	{
+            if ($this->controlador->s__fecha != NULL){
+                $f= date_create($this->controlador->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(4,$this->controlador->s__unidad, $this->controlador->s__fecha);
             
             $ar = array();
@@ -139,6 +147,10 @@ class ci_consejeros_directivos extends ci_principal
 
 	function conf__cuadro_dhondt_nd(resultados_ei_cuadro $cuadro)
 	{
+            if ($this->controlador->s__fecha != NULL){
+                $f= date_create($this->controlador->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 2 puestos
                 $cargos = 2;                
@@ -207,6 +219,10 @@ class ci_consejeros_directivos extends ci_principal
 
 	function conf__cuadro_dhondt_d(resultados_ei_cuadro $cuadro)
 	{
+            if ($this->controlador->s__fecha != NULL){
+                $f= date_create($this->controlador->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
            /* if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 3 puestos
                 $cargos = 6;                
@@ -285,21 +301,21 @@ class ci_consejeros_directivos extends ci_principal
 	function conf__form_dato_e(resultados_ei_formulario $form)
 	{
             //Agrega la cantidad de votos blancos,nulos y recurridos calculado en acta para cada unidad con claustro estudiante y tipo directivo=2
-            $ar = $this->controlador()->dep('datos')->tabla('acta')->cant_b_n_r($this->controlador->s__unidad, 3, 2);
+            $ar = $this->controlador()->dep('datos')->tabla('acta')->cant_b_n_r($this->controlador->s__unidad, 3, 2, $this->controlador->s__fecha);
             return $ar[0];
         }
         
         function conf__form_dato_g(resultados_ei_formulario $form)
 	{
             //Agrega la cantidad de votos blancos,nulos y recurridos calculado en acta para cada unidad con claustro graduados y tipo directivo=2
-            $ar = $this->controlador()->dep('datos')->tabla('acta')->cant_b_n_r($this->controlador->s__unidad, 4, 2);
+            $ar = $this->controlador()->dep('datos')->tabla('acta')->cant_b_n_r($this->controlador->s__unidad, 4, 2, $this->controlador->s__fecha);
             return $ar[0];
         }
         
         function conf__form_dato_nd(resultados_ei_formulario $form)
 	{
             //Agrega la cantidad de votos blancos,nulos y recurridos calculado en acta para cada unidad con claustro no docente y tipo directivo=2
-            $ar = $this->controlador()->dep('datos')->tabla('acta')->cant_b_n_r($this->controlador->s__unidad, 1, 2);
+            $ar = $this->controlador()->dep('datos')->tabla('acta')->cant_b_n_r($this->controlador->s__unidad, 1, 2, $this->controlador->s__fecha);
             return $ar[0];
         }
         

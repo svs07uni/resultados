@@ -14,8 +14,11 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_e(resultados_ei_cuadro $cuadro)
 	{
-            $f= date_create($this->s__fecha);
-            print_r(date_format($f, 'd-m-Y'));
+            if ($this->s__fecha != NULL){
+                $f= date_create($this->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
+            
             $this->dep('cuadro_superior_e')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -232,9 +235,10 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_g(resultados_ei_cuadro $cuadro)
 	{
-            $f= date_create($this->s__fecha);
-            print_r(date_format($f, 'd-m-Y'));
-            
+            if ($this->s__fecha != NULL){
+                $f= date_create($this->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             $this->dep('cuadro_superior_g')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -387,9 +391,10 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_nd(resultados_ei_cuadro $cuadro)
 	{
-            $f= date_create($this->s__fecha);
-            print_r(date_format($f, 'd-m-Y'));
-            
+            if ($this->s__fecha != NULL){
+                $f= date_create($this->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             $this->dep('cuadro_superior_nd')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -541,8 +546,10 @@ class ci_consejeros_superior extends toba_ci
 
 	function conf__cuadro_superior_d(resultados_ei_cuadro $cuadro)
 	{
-            $f= date_create($this->s__fecha);
-            print_r(date_format($f, 'd-m-Y'));
+            if ($this->s__fecha != NULL){
+                $f= date_create($this->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             
             $cuadro->set_datos($this->dep('datos')->tabla('unidad_electoral')->get_descripciones());
 	}
@@ -566,7 +573,9 @@ class ci_consejeros_superior extends toba_ci
 	function conf()
 	{
             $this->pantalla()->tab('pant_docente')->ocultar();
-            $this->s__fecha = toba::memoria() -> get_parametro('param');
+            if($this->s__fecha==NULL){
+                $this->s__fecha = toba::memoria() -> get_parametro('param');
+            }
 	}
 
         //-----------------------------------------------------------------------------------
