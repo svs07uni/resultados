@@ -95,6 +95,7 @@ class ci_consejeros_directivos extends ci_principal
                 $f= date_create($this->controlador->s__fecha);
                 print_r(date_format($f, 'd-m-Y'));
             }
+            
             $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(4,$this->controlador->s__unidad, $this->controlador->s__fecha);
             
             $ar = array();

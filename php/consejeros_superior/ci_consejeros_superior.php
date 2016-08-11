@@ -16,9 +16,8 @@ class ci_consejeros_superior extends toba_ci
 	{
             if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
             }
-            
+            $this->pantalla('estudiantes')->set_titulo($this->pantalla('estudiantes')->get_titulo().date_format($f, 'd-m-Y'));
             $this->dep('cuadro_superior_e')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -574,7 +573,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             $this->pantalla()->tab('pant_docente')->ocultar();
             if($this->s__fecha==NULL){
-                $this->s__fecha = toba::memoria() -> get_parametro('param');
+                $this->s__fecha = toba::memoria() -> get_dato('param');
             }
 	}
 

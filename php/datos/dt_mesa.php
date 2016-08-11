@@ -1,8 +1,14 @@
 <?php
 class dt_mesa extends resultados_datos_tabla {
 
-    function get_listado_votos($wherefiltro = null) 
-        {
+    function get_listado_votos($wherefiltro = null, $fecha) {
+        
+         if($fecha == NULL){
+                $fecha = "(SELECT max(fecha) FROM mesa)";
+          }
+          else{
+               $fecha = "'$fecha'";
+          }
         $where = "WHERE t_ue.sigla not in ('ASMA','AUZA') ";
         if (isset($wherefiltro)) {
             $where .= " and $wherefiltro ";
@@ -25,12 +31,13 @@ class dt_mesa extends resultados_datos_tabla {
 			LEFT OUTER JOIN sede as t_s ON (t_m.id_sede = t_s.id_sede) 
                         LEFT OUTER JOIN unidad_electoral as t_ue ON (t_s.id_ue = t_ue.id_nro_ue)
                         left outer join acta on acta.para=t_m.id_mesa
-                        left outer join voto_lista_csuperior t_vls on t_vls.id_acta=acta.id_acta
-                         
+                        inner join voto_lista_csuperior t_vls on t_vls.id_acta=acta.id_acta 
                         $where
+                        AND t_m.fecha = $fecha 
                         order by t_c.descripcion, t_ue.nombre, t_s.nombre, t_m.nro_mesa,t_vls.id_lista"
         ;
         $completo = toba::db('resultados')->consultar($sql);
+                
         $unidad = null;
         $sede = null;
         $nro_mesa = null;
@@ -275,8 +282,13 @@ class dt_mesa extends resultados_datos_tabla {
         }
     }
     
-     function get_listado_votos_directivo($wherefiltro = null) 
-        {
+     function get_listado_votos_directivo($wherefiltro = null, $fecha) {
+         if($fecha == NULL){
+                $fecha = "(SELECT max(fecha) FROM mesa)";
+            }
+            else{
+                $fecha = "'$fecha'";
+            }
         $where = "WHERE ";
         if (isset($wherefiltro)) {
             $where .= " $wherefiltro ";
@@ -302,6 +314,7 @@ class dt_mesa extends resultados_datos_tabla {
                         left outer join voto_lista_cdirectivo t_vld on t_vld.id_acta=acta.id_acta
                          
                         $where
+                        AND t_m.fecha = $fecha
                         order by t_c.descripcion, t_ue.nombre, t_s.nombre, t_m.nro_mesa,t_vld.id_lista"
         ;
         $completo = toba::db('resultados')->consultar($sql);

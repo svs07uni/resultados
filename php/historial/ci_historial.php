@@ -32,14 +32,14 @@ class ci_historial extends resultados_ci
 	function evt__cuadro__btn_ver($seleccion)
 	{
             
-            $arr_fecha['param'] = $seleccion['fecha'];
+            toba::memoria()->set_dato("param",  $seleccion['fecha']);
             if (strcasecmp(trim($seleccion['tipo_eleccion']), "Directivo")==0){
                 //ir a "Resultados Directivo"
-                toba::vinculador()->navegar_a("",10000050,$arr_fecha);
+                toba::vinculador()->navegar_a("",10000050,true);
             }
             else{
                 //ir a "Resultados Superior"
-                toba::vinculador()->navegar_a("", 10000051,$arr_fecha);
+                toba::vinculador()->navegar_a("", 10000051,true);
             }
 	}
         //---- Cuadro -----------------------------------------------------------------------

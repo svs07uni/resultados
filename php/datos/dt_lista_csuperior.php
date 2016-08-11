@@ -44,20 +44,5 @@ class dt_lista_csuperior extends resultados_datos_tabla
 		ORDER BY nombre";
 		return toba::db('resultados')->consultar($sql);
 	}
-
-        //usado en ci_validar
-        function get_ultimo_listado()
-	{
-		$sql = "SELECT
-			t_lc.id_nro_lista,
-			t_lc.nombre,
-			t_c.descripcion as claustro,
-			t_lc.fecha
-		FROM
-			lista_csuperior as t_lc	LEFT OUTER JOIN claustro as t_c ON (t_lc.id_claustro = t_c.id)
-                        WHERE t_lc.fecha = (SELECT max(fecha) FROM lista_csuperior)
-		ORDER BY t_c.id";
-		return toba::db('resultados')->consultar($sql);
-	}
 }
 ?>

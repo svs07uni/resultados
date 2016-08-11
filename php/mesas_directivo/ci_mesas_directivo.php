@@ -4,11 +4,19 @@ class ci_mesas_directivo extends resultados_ci
         protected $s__id_claustro;
         protected $s__id_unidad_electoral;
         protected $s__datos_filtro;
+        protected $s__fecha;
         
 	//---- Cuadro -----------------------------------------------------------------------
 
 	function conf__cuadro(toba_ei_cuadro $cuadro)
 	{
+            if ($this->s__fecha==NULL){
+                $this->s__fecha = toba::memoria()->get_dato("param");
+            }
+            if ($this->s__fecha != NULL){
+                $f= date_create($this->s__fecha);
+                print_r(date_format($f, 'd-m-Y'));
+            }
             if (isset($this->s__id_claustro)){
                 $claustro = $this->s__id_claustro;
             } else {
@@ -51,7 +59,7 @@ class ci_mesas_directivo extends resultados_ci
 
             $this->dep('cuadro')->agregar_columnas($columnas);
             
-            $datos = $this->dep('datos')->tabla('mesa')->get_listado_votos_directivo('t_m.id_claustro=' . $claustro .'AND t_ue.id_nro_ue='.$unidad_electoral);
+            $datos = $this->dep('datos')->tabla('mesa')->get_listado_votos_directivo('t_m.id_claustro=' . $claustro .'AND t_ue.id_nro_ue='.$unidad_electoral, $this->s__fecha);
             
             $cuadro->set_datos($datos);
     }
