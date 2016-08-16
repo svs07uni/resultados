@@ -15,7 +15,7 @@ class ci_mesas_directivo extends resultados_ci
             }
             if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_edicion')->set_titulo($this->pantalla('pant_edicion')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
             if (isset($this->s__id_claustro)){
                 $claustro = $this->s__id_claustro;

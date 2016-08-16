@@ -39,7 +39,7 @@ class ci_mesas_superior extends toba_ci {
 
         if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_inicial')->set_titulo($this->pantalla('pant_inicial')->get_titulo()."  ".date_format($f, 'd-m-Y'));
         }
         
         $listas = $this->dep('datos')->tabla('lista_csuperior')->get_listas_actuales($claustro, $this->s__fecha);

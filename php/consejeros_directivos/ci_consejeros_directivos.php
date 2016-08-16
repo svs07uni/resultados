@@ -21,7 +21,8 @@ class ci_consejeros_directivos extends ci_principal
 	{
             if ($this->controlador->s__fecha != NULL){
                 $f= date_create($this->controlador->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_estudiantes')->set_titulo($this->pantalla('pant_estudiantes')->get_titulo()."  ".date_format($f, 'd-m-Y'));
+                
             }
             if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 3 puestos
@@ -93,7 +94,7 @@ class ci_consejeros_directivos extends ci_principal
 	{
             if ($this->controlador->s__fecha != NULL){
                 $f= date_create($this->controlador->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_graduados')->set_titulo($this->pantalla('pant_graduados')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
             
             $listas = $this->controlador()->dep('datos')->tabla('voto_lista_cdirectivo')->get_listas_con_total_votos(4,$this->controlador->s__unidad, $this->controlador->s__fecha);
@@ -150,7 +151,7 @@ class ci_consejeros_directivos extends ci_principal
 	{
             if ($this->controlador->s__fecha != NULL){
                 $f= date_create($this->controlador->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_no_docente')->set_titulo($this->pantalla('pant_no_docente')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
             if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 2 puestos
@@ -222,7 +223,7 @@ class ci_consejeros_directivos extends ci_principal
 	{
             if ($this->controlador->s__fecha != NULL){
                 $f= date_create($this->controlador->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_docente')->set_titulo($this->pantalla('pant_docente')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
            /* if($this->controlador->s__unidad == 17 || $this->controlador->s__unidad == 18){
                 //Casos especiales cons. dir de asentamiento tiene 3 puestos

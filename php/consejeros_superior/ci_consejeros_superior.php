@@ -16,8 +16,9 @@ class ci_consejeros_superior extends toba_ci
 	{
             if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
+                $this->pantalla('pant_estudiantes')->set_titulo($this->pantalla('pant_estudiantes')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
-            $this->pantalla('estudiantes')->set_titulo($this->pantalla('estudiantes')->get_titulo().date_format($f, 'd-m-Y'));
+            
             $this->dep('cuadro_superior_e')->colapsar();//No se muestra el cuadro en un principio
             
             $unidades = $this->dep('datos')->tabla('unidad_electoral')->get_descripciones_ponderados();
@@ -236,7 +237,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_graduados')->set_titulo($this->pantalla('pant_graduados')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
             $this->dep('cuadro_superior_g')->colapsar();//No se muestra el cuadro en un principio
             
@@ -392,7 +393,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_no_docente')->set_titulo($this->pantalla('pant_no_docente')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
             $this->dep('cuadro_superior_nd')->colapsar();//No se muestra el cuadro en un principio
             
@@ -547,7 +548,7 @@ class ci_consejeros_superior extends toba_ci
 	{
             if ($this->s__fecha != NULL){
                 $f= date_create($this->s__fecha);
-                print_r(date_format($f, 'd-m-Y'));
+                $this->pantalla('pant_docente')->set_titulo($this->pantalla('pant_docente')->get_titulo()."  ".date_format($f, 'd-m-Y'));
             }
             
             $cuadro->set_datos($this->dep('datos')->tabla('unidad_electoral')->get_descripciones());
@@ -591,12 +592,15 @@ class ci_consejeros_superior extends toba_ci
             
             $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(3, $this->s__fecha);
             
-            $datos['cargadas'] = ($cargadas * 100 / $total);
-            $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
-            $datos['confirmadas'] = ($confirmadas * 100 / $total);
-            $datos['confirmadas'] = round($datos['confirmadas'],2). " % ($confirmadas de $total)";
-            $datos['definitivas'] = ($definitivas * 100 / $total);
-            $datos['definitivas'] = round($datos['definitivas'],2). " % ($definitivas de $total)";
+            $datos = array();
+            if($total>0){
+                $datos['cargadas'] = ($cargadas * 100 / $total);
+                $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
+                $datos['confirmadas'] = ($confirmadas * 100 / $total);
+                $datos['confirmadas'] = round($datos['confirmadas'],2). " % ($confirmadas de $total)";
+                $datos['definitivas'] = ($definitivas * 100 / $total);
+                $datos['definitivas'] = round($datos['definitivas'],2). " % ($definitivas de $total)";
+            }
             
             return $datos;
 	}
@@ -613,12 +617,15 @@ class ci_consejeros_superior extends toba_ci
             
             $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(4, $this->s__fecha);
             
-            $datos['cargadas'] = ($cargadas * 100 / $total);
-            $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
-            $datos['confirmadas'] = ($confirmadas * 100 / $total);
-            $datos['confirmadas'] = round($datos['confirmadas'],2). " % ($confirmadas de $total)";
-            $datos['definitivas'] = ($definitivas * 100 / $total);
-            $datos['definitivas'] = round($datos['definitivas'],2). " % ($definitivas de $total)";
+            $datos = array();
+            if($total>0){
+                $datos['cargadas'] = ($cargadas * 100 / $total);
+                $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
+                $datos['confirmadas'] = ($confirmadas * 100 / $total);
+                $datos['confirmadas'] = round($datos['confirmadas'],2). " % ($confirmadas de $total)";
+                $datos['definitivas'] = ($definitivas * 100 / $total);
+                $datos['definitivas'] = round($datos['definitivas'],2). " % ($definitivas de $total)";
+            }
             
             return $datos;
 	}
@@ -635,12 +642,15 @@ class ci_consejeros_superior extends toba_ci
             
             $total = $this->dep('datos')->tabla('mesa')->get_total_mesas(1, $this->s__fecha);
             
-            $datos['cargadas'] = ($cargadas * 100 / $total);
-            $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
-            $datos['confirmadas'] = ($confirmadas * 100 / $total);
-            $datos['confirmadas'] = round($datos['confirmadas'],2). " % ($confirmadas de $total)";
-            $datos['definitivas'] = ($definitivas * 100 / $total);
-            $datos['definitivas'] = round($datos['definitivas'],2). " % ($definitivas de $total)";
+            $datos = array();
+            if($total>0){
+                $datos['cargadas'] = ($cargadas * 100 / $total);
+                $datos['cargadas'] = round($datos['cargadas'], 2). " % ($cargadas de $total)";
+                $datos['confirmadas'] = ($confirmadas * 100 / $total);
+                $datos['confirmadas'] = round($datos['confirmadas'],2). " % ($confirmadas de $total)";
+                $datos['definitivas'] = ($definitivas * 100 / $total);
+                $datos['definitivas'] = round($datos['definitivas'],2). " % ($definitivas de $total)";
+            }
             
             return $datos;
 	}
